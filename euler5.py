@@ -36,7 +36,7 @@ while Found == False:
 		i += 20
 
 # At this point we have found our answer so print it out to verify
-print('The answer is:', i,'\n\n')
+print('\n\tThe answer is:', i,'\n\n')
 for k in range(1,21):
     print('{a:6} divided by {b:3} is: {c:10.0f} - remainder: {d:3}'.format(a=i, b=k, c=i/k, d=i%k))
 
