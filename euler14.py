@@ -18,6 +18,7 @@ NOTE: Once the chain starts the terms are allowed to go above one million.
 
 '''
 
+
 longestChain = 0
 biggestNum = 0
 
@@ -27,22 +28,28 @@ biggestNum = 0
 collatz = {1:1}
 
 
-print('\n\nCollatz Sequence\n\n')
-
-# num is the starting number
-for num in range(2,1000000):
-	chain = 0 # no. of terms in the chain
-	n = num
+def getCollatz(n):
+	''' When passed an integer, will return its Collatz length.'''
+	lchain = 0 # no. of terms in the chain
 	while n > 0 :
-		if not n in collatz: # Check we don't have a length for this number in the table	
+		if not n in collatz: # Check we don't have a length for this number in the table
 			if n % 2 == 0: #n is even
 				n /= 2
 			else: # n is odd
 				n = (3 * n) + 1
-			chain += 1
+			lchain += 1
 		else: # We have the collatz length for this number in our dictionary
-			chain += collatz.get(n)
-			break # exit the while loop as we already know the collatz length for the rest of the numbers
+			lchain += collatz.get(n)
+			return(lchain)
+	return(lchain)
+
+	
+print('\n\nCollatz Sequence\n\n')
+
+
+# num is the starting number
+for num in range(2,1000000):
+	chain = getCollatz(num)
 	if not num in collatz: # update our dictionary with the collatz length for num
 		collatz.update({num:chain})
 	if chain > longestChain:
