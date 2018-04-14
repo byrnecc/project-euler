@@ -26,13 +26,15 @@ biggestNum = 0
 # This way we can save working out the length of every number.
 # key is number, value is length.
 collatz = {1:1}
-
+#colList = [] # We can store numbers here to work out the collatz length, and fill out our dictionary.
 
 def getCollatz(n):
 	''' When passed an integer, will return its Collatz length.'''
+	#global colList
 	lchain = 0 # no. of terms in the chain
 	while n > 0 :
 		if not n in collatz: # Check we don't have a length for this number in the table
+			#colList.append(n)
 			if n % 2 == 0: #n is even
 				n /= 2
 			else: # n is odd
@@ -55,7 +57,11 @@ for num in range(2,1000000):
 	if chain > longestChain:
 		biggestNum = num
 		longestChain = chain
-
+	# work out the collatz length of every item in colList to populate  the dictionary
+	# while len(colList) > 0:
+	#	a = colList.pop()
+	#	chain = getCollatz(a)
+	#	collatz.update({a:chain})
 		
 print('The largest starting number under 1 million with the longest chain is:', biggestNum, 'with a chain of', longestChain, 'terms')
 exit
