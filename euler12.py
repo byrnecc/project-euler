@@ -20,8 +20,9 @@ We can see that 28 is the first triangle number to have over five divisors.
 What is the value of the first triangle number to have over five hundred divisors?
 '''
 
+dictfactors = {}  # A dictionary to store our factored numbers for lookup
 
-def trinum(n):
+def get_trinum(n):
 	''' Takes single integer as input.
 	Will provide the indexed triangle number.
 	eg trinum(3) = 6
@@ -33,43 +34,18 @@ def trinum(n):
 
 def get_factors(n):
 	''' Will return out the factors of a passed integer.'''
-	ListFactors = [1,n] # List containing the factors for current value of t. 
-	for f in range(2,int(n/2+1)): # we can assume that after t/2 we won't find any more whole number factors
+	ListFactors = [n] # List containing the factors for current value of t. 
+	for f in range(1,int(n/2+1)): # we can assume that after t/2 we won't find any more whole number factors
 		if n % f == 0:
-			if ListFactors.count(f) == 0:
+			if not f in ListFactors:
 				ListFactors.append(f)	# Don't add this factor to the list if we already have it
 	return(ListFactors)
 
 
-n = input('Enter index of triangle number:')
-a = trinum(n)
-b = get_factors(a)
-b.sort()
-print('Factors of',a,'are:',b)
+# main loop, iterate through triangle numbers and factorize them
+for i in range(1,20):
+	t = get_trinum(i) # our triangle number for this iteration of the loop
+	tfactors = get_factors(t)
+	print('Triangle number:',t,'Index',i)
+	print('Factors:',tfactors)
 
-
-
-'''
-n = 0	# increase by 1 each loop
-t = 0	# triangle numbers. add n each loop
-while True:
-	n += 1
-	t += n
-	if n < 1
-		continue
-	# Try to find the first lowest factor.
-	ListFactors = [1,t] # List containing the factors for current value of t. Reset for each new value of t
-	for f in range(2,int(t/2+1)): # we can assume that after t/2 we won't find any more whole number factors
-		if t % f == 0:
-			if ListFactors.count(f) == 0:
-				ListFactors.append(f)	# Don't add this factor to the list if we already have it
-
-	# Now check that our total number of factors is over 500
-	#print('triangle number:',t)
-	#print('Factors:',len(ListFactors))
-	if len(ListFactors) >= 50:
-		break
-ListFactors.sort()	
-print('The lowest triangle number with other 500 factors is:',t)
-print('Factors are:',ListFactors)
-'''		
