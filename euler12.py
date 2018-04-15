@@ -19,7 +19,7 @@ We can see that 28 is the first triangle number to have over five divisors.
 
 What is the value of the first triangle number to have over five hundred divisors?
 '''
-n = input('Enter index of triangle number:')
+
 
 def trinum(n):
 	''' Takes single integer as input.
@@ -30,15 +30,32 @@ def trinum(n):
 	n = int(n)
 	return int((n*(n+1))/2)
 
-print(trinum(n))
+
+def get_factors(n):
+	''' Will return out the factors of a passed integer.'''
+	ListFactors = [1,n] # List containing the factors for current value of t. 
+	for f in range(2,int(n/2+1)): # we can assume that after t/2 we won't find any more whole number factors
+		if n % f == 0:
+			if ListFactors.count(f) == 0:
+				ListFactors.append(f)	# Don't add this factor to the list if we already have it
+	return(ListFactors)
+
+
+n = input('Enter index of triangle number:')
+a = trinum(n)
+b = get_factors(a)
+b.sort()
+print('Factors of',a,'are:',b)
+
+
+
 '''
 n = 0	# increase by 1 each loop
 t = 0	# triangle numbers. add n each loop
 while True:
 	n += 1
 	t += n
-	# We can assume that to have 500 factors it must be at least the 500th triangle number
-	if n < 500:
+	if n < 1
 		continue
 	# Try to find the first lowest factor.
 	ListFactors = [1,t] # List containing the factors for current value of t. Reset for each new value of t
