@@ -20,32 +20,28 @@ We can see that 28 is the first triangle number to have over five divisors.
 What is the value of the first triangle number to have over five hundred divisors?
 '''
 
-dictfactors = {}  # A dictionary to store our factored numbers for lookup
-
-def get_trinum(n):
-	''' Takes single integer as input.
-	Will provide the indexed triangle number.
-	eg trinum(3) = 6
-	Triangle numbers are made by adding all preceding natural numbers in sequence.
-	'''
-	n = int(n)
-	return int((n*(n+1))/2)
+max_divisors = 500 # stop calculating once we have a number with this many divisors
+t = 0 # Triangle number to factorize
+i = 0 # iterator for the while loop, adds to t to make the next number
 
 
 def get_factors(n):
-	''' Will return out the factors of a passed integer.'''
-	ListFactors = [n] # List containing the factors for current value of t. 
-	for f in range(1,int(n/2+1)): # we can assume that after t/2 we won't find any more whole number factors
+	count = 0 # The number of factors for n
+	''' Will return out the quantity of factors of a passed integer.'''
+	for f in range(1,int((n**0.5)+1)): # iterates up to square root of n. after that only repeating factors.
 		if n % f == 0:
-			if not f in ListFactors:
-				ListFactors.append(f)	# Don't add this factor to the list if we already have it
-	return(ListFactors)
+			count += 2 # if n / f = x, then n / x = f - two factors
+	return(count)
 
 
 # main loop, iterate through triangle numbers and factorize them
-for i in range(1,20):
-	t = get_trinum(i) # our triangle number for this iteration of the loop
+while True:
+	i += 1
+	t += i
 	tfactors = get_factors(t)
-	print('Triangle number:',t,'Index',i)
-	print('Factors:',tfactors)
+	#print('Triangle number:',t,' - Index',i,' - Factors:',tfactors)
+	if tfactors >= max_divisors: break # Check that this number has enough divisors to be a solution
+
+print ('\nThe solution is',t,'with',tfactors,'divisors.')
+exit(0)
 
