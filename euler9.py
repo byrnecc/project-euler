@@ -17,7 +17,7 @@ Find the product abc.
 # For our solution, a + b + c = 1000
 
 # set initial value of m and n^2
-m = 21
+m = 2
 n = 1
 
 # varSum holds our sum of a + b + c, to check answer meets conditions
