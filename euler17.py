@@ -13,19 +13,32 @@ and 115 (one hundred and fifteen) contains 20 letters.
 The use of "and" when writing out numbers is in compliance with British usage.
 '''
 
-
-
 # Build a lookup array of the length of each digit in the singles column.
-# We need to count 0 - 19 to account for the teens.
-lenSingles = list(4,3,3,4,4,3,5,5,4,3,6,6,8,8,7,7,8,8)
+# We need to count 0 - 19 to account for the teens. 
+lenSingles = [0,3,3,5,4,4,3,5,5,4,3,6,6,8,8,7,7,9,8,8]
 
 # Build a lookup array of the length of each digit in the tens column.
-# 0 and 1 have no length, as the latter is included in the singles/teens
-lenTens = list(0,0,6,6,5,5,5,6,6)
+lenTens = [0,3,6,6,5,5,5,7,6,6]
 
-# Build a lookup array of the length of each digit in the hundreds column.
-# Need to add 3 for 'and' eg two hundred and eleven...
-lenHundreds = list(0,13,13,15,14,14,13,15,15,14)
+varTotal = 11 # just add value for 'one thousand' now
 
-# Lookup array for thousands column - either 0 (for <1000) or 13 (for =1000)
-lenThousands = list(0,11)
+# cycle through numbers up to 999
+for i in range(1,1000):
+    ones = int(i % 10) # get the ones column
+    tens = int((i - ones) / 10) # get the tens column
+    if tens > 9: # get the hundreds column
+        x = tens % 10
+        huns = int((tens - x ) / 10) # get the hundreds column
+        tens = int(x)
+        varTotal += lenSingles[huns] # look up the value of the hundreds digit
+        varTotal += 7 # add 7 for 'hundred'
+        # Check if we need to add 'and' eg one hundred and one
+        if tens + ones > 0:
+            varTotal += 3
+    else: # less than 100
+        huns = 0
+    if tens == 1:
+        varTotal += lenSingles[ones + 10] # teen numbers
+    else:
+        varTotal += lenSingles[ones] + lenTens[tens]
+print(varTotal)
